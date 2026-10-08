@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5f1">
+  <meta name="description" content="Opalsign — industrial machinery, equipment and consumables.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/flyer.css">
+  <link rel="stylesheet" href="css/storefront.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <title>Opalsign | Industrial Solutions</title>
+</head>
+<body>
+  <div id="splash" class="splash">
+    <img class="splash-mark" src="./assets/opalsign-logo.jpe" alt="Opalsign" style="width:min(320px,calc(100vw - 44px));height:96px;object-fit:cover;object-position:center 33%;border:0;border-radius:0;background:transparent">
+    <p>Industrial Solutions · Machinery · Consumables</p><div class="loader"></div>
+  </div>
+  <section id="flyer-banner" class="flyer-banner" aria-label="Store promotion" hidden></section>
+  <header class="topbar">
+    <div class="brandline">
+      <img class="brand-mark" src="./assets/opalsign-logo.jpe" alt="Opalsign" style="width:clamp(88px,30vw,132px);height:48px;object-fit:cover;object-position:center 33%;border:0;border-radius:0;flex:none">
+      <div style="min-width:0;flex:1"><small>Premium Industrial Solutions · Ghana</small></div>
+      <button class="bag" id="cart-open" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
+        <span id="cart-count">0</span>
+      </button>
+    </div>
+    <label class="search"><span>⌕</span><input id="search" placeholder="Search products..." autocomplete="off"></label>
+  </header>
+  <nav class="categories" id="categories">
+    <button class="chip active" data-category="All">All</button>
+    <button class="chip" data-category="Printers">Printers</button>
+    <button class="chip" data-category="CNC">CNC</button>
+    <button class="chip" data-category="Finishing">Finishing</button>
+    <button class="chip" data-category="Consumables">Consumables</button>
+    <button class="chip" data-category="Accessories">Accessories</button>
+  </nav>
+  <main>
+    <section class="hero">
+      <div><span class="eyebrow">EQUIPMENT THAT WORKS AS HARD AS YOU DO</span><h2>Power your next<br>big production.</h2><p>Industrial machinery, precision equipment and trusted consumables.</p><button class="primary" id="browse">Explore products <span>→</span></button></div>
+      <div class="hero-art"><div class="machine">⚙</div><span>OPALSIGN<br>INDUSTRIAL</span></div>
+    </section>
+    <div class="section-head"><div><small>OUR CATALOGUE</small><h2>Explore products</h2></div><span id="result-count"></span></div>
+    <section class="product-grid" id="products"></section>
+    <section class="quote-banner"><div><small>NEED A CUSTOM SOLUTION?</small><h2>Request a machinery quotation</h2><p>Tell us what your business needs. Our team will help you find the right equipment.</p></div><button class="outline" id="quote-open">Request a quote →</button></section>
+    <section class="info-strip"><div><b>✓</b><span>Trusted equipment</span></div><div><b>↗</b><span>Delivery across Ghana</span></div><div><b>◷</b><span>After-sales support</span></div></section>
+  </main>
+  <footer><b>OPALSIGN</b><span>Industrial solutions for growing businesses.</span><small>© <span id="year"></span> Opalsign
+  <br><a href="./admin.html">Staff portal</a>
+  <br> <Strong>Powered by:<a href="https://brilliant-smakager-d16bb0.netlify.app/" class="hover-link">Humble-Tech</a> 
+  .</Strong> </br>
+  </small></footer>
+
+  <nav class="bottom-nav">
+    <button class="nav-item selected" data-view="shop"><span>⌂</span>Shop</button>
+    <button class="nav-item" data-view="orders"><span>▤</span>Orders</button>
+    <button class="nav-item" data-view="support"><span>◯</span>Support</button>
+  </nav>
+
+  <dialog id="product-dialog" class="modal"><form method="dialog"><button class="close">×</button></form><div id="product-detail"></div></dialog>
+  <dialog id="cart-dialog" class="modal"><form method="dialog"><button class="close">×</button></form><h2>Your cart</h2><div id="cart-items"></div><div class="cart-total"><span>Total</span><strong id="cart-total">GHS 0.00</strong></div><button class="primary full" id="checkout">Proceed to checkout →</button></dialog>
+  <dialog id="checkout-dialog" class="modal"><form method="dialog"><button class="close">×</button></form><h2>Checkout</h2><p class="muted">No account required. Your order number will be generated automatically.</p><form id="checkout-form" class="stack">
+    <input name="name" placeholder="Full name" required><input name="phone" placeholder="Phone number" required><input name="email" type="email" placeholder="Email address" required>
+    <select name="delivery" id="delivery"><option value="direct">Direct delivery</option><option value="pickup">Pickup station</option></select>
+    <input name="address" id="address" placeholder="Delivery address" required>
+    <select name="payment" id="payment-method"><option value="card">Card (Paystack)</option><option value="momo">Mobile Money (Paystack)</option><option value="bank">Bank transfer (Paystack)</option><option value="physical">Physical payment</option></select>
+    <button class="primary full" id="submit-checkout">Pay with Paystack</button>
+  </form><p class="tiny">Paystack test checkout uses your public test key. Orders remain pending until a trusted backend verifies the transaction.</p></dialog>
+  <dialog id="quote-dialog" class="modal"><form method="dialog"><button class="close">×</button></form><h2>Request a quotation</h2><form id="quote-form" class="stack"><input name="name" placeholder="Your name" required><input name="company" placeholder="Company name"><input name="phone" placeholder="Phone number" required><input name="email" type="email" placeholder="Email"><textarea name="details" placeholder="Machine, model, quantity and requirements" required></textarea><button class="primary full">Submit request</button></form></dialog>
+  <dialog id="orders-dialog" class="modal"><form method="dialog"><button class="close">×</button></form><h2>Track an order</h2><p class="muted">Enter your order reference to view its status and, while the driver is on an active trip, approximate live location.</p><form id="track-form" class="stack"><input name="order" placeholder="e.g. ALG-2026-000001" required><button class="primary full">Track order</button></form><div id="tracking-result"></div></dialog>
+  <dialog id="support-dialog" class="modal"><form method="dialog"><button class="close">×</button></form><h2>Customer support</h2><p class="muted">Contact Opalsign using the available support channels.</p><div id="support-contacts"></div><div id="support-branches"></div><p class="tiny">Support contacts are configured by the administrator in this browser's demo dashboard.</p></dialog>
+  <div id="toast" class="toast"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script type="module" src="js/app.js"></script>
+</body></html>

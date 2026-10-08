@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5f1">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/flyer.css">
+  <link rel="stylesheet" href="css/storefront.css">
+  <title>Staff portal | Opalsign</title>
+</head>
+<body class="admin-page">
+  <header class="topbar admin-topbar">
+    <a href="./index.html" class="admin-store-link">← Back to storefront</a>
+    <strong>OPALSIGN STAFF</strong>
+    <a href="./driver.html" class="admin-store-link">Driver portal →</a>
+  </header>
+  <main id="admin-app" class="admin-app">
+    <section class="admin-login">
+      <span class="product-cat">OPALSIGN · STAFF ACCESS</span>
+      <h1>Staff sign in</h1>
+      <p class="muted">Sign in with your staff username. Ask your administrator to create an account.</p>
+      <div class="demo-credentials"><strong>Demo credentials</strong><span>Username: <code>demo-admin</code></span><span>Password: <code>OpalsignDemo2026!</code></span></div>
+      <form id="admin-login-form" class="stack">
+        <label>Username<input name="username" type="text" autocomplete="username" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="primary full">Sign in</button>
+      </form>
+      <p id="admin-message" class="admin-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
